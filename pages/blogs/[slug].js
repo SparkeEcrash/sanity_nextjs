@@ -10,9 +10,10 @@ import { useRouter } from "next/router";
 import BlogContent from "components/BlogContent";
 import PreviewAlert from 'components/PreviewAlert';
 
-const BlogDetail = ({ blog, preview, previewData:{message = null} }) => {
+const BlogDetail = ({ blog, preview, previewData }) => {
   /////////////////// IF fallback is set to true you need these below lines of code
-  const router = useRouter();
+	const router = useRouter();
+	const message = previewData?.message;
 
   if (!router.isFallback && !blog?.["what we want for api"]) {
     //this is when a page is truly not found
