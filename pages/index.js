@@ -1,88 +1,89 @@
-import React from 'react'
-import Head from 'next/head'
-import Nav from '../components/nav'
+import { useState } from "react";
+import { Row, Button } from "react-bootstrap";
+import PageLayout from "components/PageLayout";
+import AuthorIntro from "components/AuthorIntro";
+import FilteringMenu from "components/FilteringMenu";
+import PreviewAlert from 'components/PreviewAlert';
 
-const Home = () => (
-  <div>
-    <Head>
-      <title>Home</title>
-      <link rel="icon" href="/favicon.ico" />
-    </Head>
+import { useGetBlogsPages } from "actions/pagination";
+import { getPaginatedBlogs } from "lib/api";
 
-    <Nav />
+export default function Home(props) {
+  const [filter, setFilter] = useState({
+		view: { list: 0 },
+		date: { asc: 0 }
+	});
+	
+	// loadMore: to load more data
+	// isLoadingMore: is true whenever we are making request to fetch data
+	// isReachingEnd: is true when we loaded all of the data, data is empty (empty array)
 
-    <div className="hero">
-      <h1 className="title">Welcome to Next.js!</h1>
-      <p className="description">
-        To get started, edit <code>pages/index.js</code> and save to reload.
-      </p>
+	let blogs = props.blogs;
 
-      <div className="row">
-        <a href="https://nextjs.org/docs" className="card">
-          <h3>Documentation &rarr;</h3>
-          <p>Learn more about Next.js in the documentation.</p>
-        </a>
-        <a href="https://nextjs.org/learn" className="card">
-          <h3>Next.js Learn &rarr;</h3>
-          <p>Learn about Next.js by following an interactive tutorial!</p>
-        </a>
-        <a
-          href="https://github.com/zeit/next.js/tree/master/examples"
-          className="card"
-        >
-          <h3>Examples &rarr;</h3>
-          <p>Find other example boilerplates on the Next.js GitHub.</p>
-        </a>
-      </div>
-    </div>
+  const { pages, isLoadingMore, isReachingEnd, loadMore } = useGetBlogsPages({
+    blogs,
+    filter,
+  });
 
-    <style jsx>{`
-      .hero {
-        width: 100%;
-        color: #333;
-      }
-      .title {
-        margin: 0;
-        width: 100%;
-        padding-top: 80px;
-        line-height: 1.15;
-        font-size: 48px;
-      }
-      .title,
-      .description {
-        text-align: center;
-      }
-      .row {
-        max-width: 880px;
-        margin: 80px auto 40px;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-around;
-      }
-      .card {
-        padding: 18px 18px 24px;
-        width: 220px;
-        text-align: left;
-        text-decoration: none;
-        color: #434343;
-        border: 1px solid #9b9b9b;
-      }
-      .card:hover {
-        border-color: #067df7;
-      }
-      .card h3 {
-        margin: 0;
-        color: #067df7;
-        font-size: 18px;
-      }
-      .card p {
-        margin: 0;
-        padding: 12px 0 0;
-        font-size: 13px;
-        color: #333;
-      }
-    `}</style>
-  </div>
-)
+  /* CORS ISSUE ENCOUNTERED
+	useEffect(() => {
+		async function fetchBlogs() {
+			const blogs = await getAllBlogs();
+			return blogs;
+		}
 
-export default Home
+		fetchBlogs();
+	}, [])
+	*/
+
+  return (
+    <PageLayout>
+			{ props.preview && <PreviewAlert /> }
+      <AuthorIntro />
+      <FilteringMenu
+        filter={filter}
+        onChange={(option, value) => {
+          setFilter({ ...filter, [option]: value });
+        }}
+      />
+      <hr />
+      {props.message}
+      <Row className="mb-5">{pages}</Row>
+			<div style={{textAlign: 'center'}}>
+			<Button onClick={loadMore} disabled={isReachingEnd || isLoadingMore} size="lg" variant="outline-secondary">{isLoadingMore ? '...' : isReachingEnd ? 'No more Blogs' : 'More Blogs'}</Button>
+			</div>
+    </PageLayout>
+  );
+}
+
+// export async function getServerSideProps() {
+//this will create dynamic page
+//console log random number will always be different when refreshed
+
+// This function is called during the build (build time)
+// This gets called on the server
+// Provides props to your page
+// It will create static page
+//console log random number will always be the same when refreshed
+export async function getStaticProps({preview = false}) {
+	//this will create a static apge
+	const blogs = await getPaginatedBlogs({ offset: 0, date: 'desc' });
+
+  return {
+    props: {
+      message: "Hello World",
+			blogs,
+			preview
+    },
+  };
+}
+
+/*LESSON 15*/
+// Static Page (next.js) **getStaticProps()**
+// Faster, can be cached using CDN
+// Created at build time
+// When we making the request we are always receiving the same html document
+
+// Dynamic Page (react.js) **getServerSideProps()**
+// Created at request time (we can fetch data on server)
+// Little bit slower, the time depends on data you are fetching
