@@ -74,7 +74,9 @@ export async function getStaticProps({preview = false}) {
       message: "Hello World",
 			blogs,
 			preview
-    },
+		},
+		revalidate: 1,
+		//this makes it so that the server re-builds (npm run build) the pages when new data is added from the backend
   };
 }
 

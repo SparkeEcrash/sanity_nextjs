@@ -38,7 +38,7 @@ const BlogDetail = ({ blog, preview, previewData }) => {
             subtitle={blog.subtitle}
             coverImage={urlFor(blog.coverImage).height(600).url()}
             author={blog.author}
-            date={moment(blog.date).format("LLLL")}
+            date={moment(blog.date).format("LL")}
           />
           <hr />
           {/* Blog Content Here */}
@@ -55,7 +55,9 @@ export async function getStaticProps({ params, preview = false, previewData = {m
 	console.log('previewData:', previewData);
   const blog = await getBlogBySlug(params.slug, preview);
   return {
-    props: { blog, preview, previewData },
+		props: { blog, preview, previewData },
+		revalidate: 1,
+		//this makes it so that the server re-builds (npm run build) the pages when new data is added from the backend
   };
 }
 
