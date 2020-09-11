@@ -39,7 +39,7 @@ export default function Home(props) {
   return (
     <PageLayout>
 			{ props.preview && <PreviewAlert /> }
-      <AuthorIntro />
+      {/* <AuthorIntro /> */}
       <FilteringMenu
         filter={filter}
         onChange={(option, value) => {

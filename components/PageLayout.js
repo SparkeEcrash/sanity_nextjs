@@ -20,14 +20,14 @@ export default function PageLayout({ children, className }) {
 				/>
         <div className={`page-wrapper ${className}`}>{children}</div>
         <footer className="page-footer">
-          <div>
+          {/* <div>
             <a href="#">courses</a>
             {" | "}
             <a href="#">github</a>
             {" | "}
             <a href="#">facebook</a>
             {" | "}
-          </div>
+          </div> */}
         </footer>
       </Container>
 			<style jsx global>
