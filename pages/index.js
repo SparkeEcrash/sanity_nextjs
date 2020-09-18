@@ -77,7 +77,7 @@ export async function getStaticProps({preview = false}) {
 
   return {
     props: {
-      message: "Hello World",
+      message: "",
 			blogs,
 			preview
 		},
