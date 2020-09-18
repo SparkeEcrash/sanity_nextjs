@@ -16,7 +16,7 @@ import "@fortawesome/fontawesome-svg-core/styles.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "highlight.js/styles/ocean.css";
 import "react-toggle/style.css";
-import "styles/index.scss";
+import "styles/main.scss";
 
 export default ({ Component, pageProps }) => (
   <ThemeProvider>

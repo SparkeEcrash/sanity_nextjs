@@ -59,19 +59,15 @@ const CardItem = ({
               <Card.Text>Placeholder Subtitle</Card.Text>
             </>
           ) : (
-            <>
+            <Link {...link}>
+							<a>
               <Card.Title className="card-main-title">{title.length > 40 ? title.substr(0, 40) + '...' : title}</Card.Title>
               <Card.Text>{subtitle.length > 40 ? subtitle.substr(0, 40) + '...' : subtitle}</Card.Text>
-            </>
+							</a>
+            </Link>
           )}
         </Card.Body>
       </div>
-      {link && (
-        /* <Link href={`/blogs/${slug}`}> */
-        <Link {...link}>
-          <a className="card-button">Read More</a>
-        </Link>
-      )}
     </Card>
   );
 };

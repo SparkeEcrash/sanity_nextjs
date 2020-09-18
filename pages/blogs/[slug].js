@@ -30,6 +30,7 @@ const BlogDetail = ({ blog, preview, previewData }) => {
 
   return (
     <PageLayout className="blog-detail-page">
+			<div className="blog-panel">
       <Row>
         <Col md={{ span: 10, offset: 1 }}>
 					{ preview && <PreviewAlert message={message}/>}
@@ -45,6 +46,7 @@ const BlogDetail = ({ blog, preview, previewData }) => {
           <BlogContent content={blog.content}></BlogContent>
         </Col>
       </Row>
+			</div>
     </PageLayout>
   );
 };

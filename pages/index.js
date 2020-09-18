@@ -50,7 +50,13 @@ export default function Home(props) {
       {props.message}
       <Row className="mb-5">{pages}</Row>
 			<div style={{textAlign: 'center'}}>
-			<Button onClick={loadMore} disabled={isReachingEnd || isLoadingMore} size="lg" variant="outline-secondary">{isLoadingMore ? '...' : isReachingEnd ? 'No more Blogs' : 'More Blogs'}</Button>
+			{
+				!isReachingEnd && (
+					<div onClick={loadMore} disabled={isLoadingMore} className="load-more">
+						{isLoadingMore ? '...' : 'More'}
+					</div>
+				)
+			}
 			</div>
     </PageLayout>
   );

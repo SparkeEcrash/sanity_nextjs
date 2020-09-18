@@ -1,0 +1,40 @@
+$font-primary-regular: bebas-neue;
+$font-secondary-regular: myriad-pro;
+$font-secondary-light: myriad-pro-light;
+
+.heading-primary {
+	color: var(--sng-white);
+	&--main {
+		font-family: $font-primary-regular;
+	}
+
+	// &--sub {
+	// 	font-family: myriad-pro;
+	// 	font-weight: regular;
+	// }
+
+	&--sub {
+		font-family: $font-secondary-light;
+	}
+}
+
+.heading-secondary {
+	color: var(--sng-white);
+	&--main {
+		font-family: $font-secondary-light;
+	}
+	&--sub {
+		font-family: $font-secondary-regular;
+	}
+
+
+}
+
+.heading-tertiary {
+
+}
+
+.paragraph {
+
+}
+

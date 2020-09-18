@@ -45,19 +45,15 @@ const CardListItem = ({
               <Card.Text>Placeholder Subtitle</Card.Text>
             </>
           ) : (
-            <>
-              <Card.Title className="card-main-title">{title}</Card.Title>
-              <Card.Text>{subtitle}</Card.Text>
-            </>
+            <Link {...link}>
+              <>
+                <Card.Title className="card-main-title">{title}</Card.Title>
+                <Card.Text>{subtitle}</Card.Text>
+              </>
+            </Link>
           )}
         </Card.Body>
       </div>
-      {link && (
-        /* <Link href={`/blogs/${slug}`}> */
-        <Link {...link}>
-          <a className="card-button">Read More</a>
-        </Link>
-      )}
     </Card>
   );
 };
