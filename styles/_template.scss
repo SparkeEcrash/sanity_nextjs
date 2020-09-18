@@ -44,11 +44,11 @@ a:hover {
     background-color: #fff;
     border-radius: 15px;
     box-shadow: 2px 5px 25px rgba(0, 0, 0, .15);
-    min-height: 280px;
+    // min-height: 280px;
     position: relative;
     z-index: 2;
     padding: 20px;
-		padding-bottom: 40px;
+		// padding-bottom: 40px;
 		
 		&.no-image {
 			min-height: auto;
@@ -120,7 +120,7 @@ a:hover {
 
   &.fj-card-list {
     .card-body-wrapper {
-      min-height: 180px;
+      // min-height: 180px;
       // position: relative;
       // z-index: 2;
       // padding: 20px;
