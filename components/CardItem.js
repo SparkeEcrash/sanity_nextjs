@@ -61,7 +61,7 @@ const CardItem = ({
           ) : (
             <Link {...link}>
 							<a>
-              <Card.Title className="card-main-title">{title.length > 40 ? title.substr(0, 40) + '...' : title}</Card.Title>
+              <Card.Title className="card-main-title">{title.length > 60 ? title.substr(0, 60) + '...' : title}</Card.Title>
               <Card.Text>{subtitle.length > 40 ? subtitle.substr(0, 40) + '...' : subtitle}</Card.Text>
 							</a>
             </Link>
